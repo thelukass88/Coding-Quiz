@@ -2,7 +2,7 @@
 let questionsAndAnswers = [
          {
             number: 1, 
-            question: 'An array can be used to collect data on:',
+            question: ' An array can be used to collect data on:',
             answer: "All data types",
             options: [
                  'Only strings',
@@ -13,7 +13,7 @@ let questionsAndAnswers = [
          },
          {
             number: 2, 
-            question: 'What does DOM stand for:',
+            question: ' What does DOM stand for:',
             answer: "Document, Object, Model",
             options: [
                  'Document, Object, Model',
@@ -24,7 +24,7 @@ let questionsAndAnswers = [
          },
          {
             number: 3, 
-            question: 'var, let and const all operate in the same way and have no distinctions:',
+            question: ' var, let and const all operate in the same way and have no distinctions:',
             answer: "False", 
             options: [
                  'True',
@@ -33,9 +33,9 @@ let questionsAndAnswers = [
          },
          {
             number: 4, 
-            question: 'Which event would work best with a submit button?',
+            question: ' Which event would work best with a submit button?',
             answer: "click or onclick", 
-            optiond: [
+            options: [
                  'keydown or onkeydown',
                  'change or onchange',
                  'click or onclick',

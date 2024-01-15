@@ -1,16 +1,13 @@
 
-const startButton = document.getElementById("startButton");
-const startPage = document.querySelector(".start");
-const questionBox = document.getElementById("questions");
+const startButton = document.getElementById("start");
+const startPage = document.getElementById("start-screen");
 
-
-//when start button is clicked
-if startButton button clicked
-startButton.onclick = ()=>{
-    startPage.classList.remove("activeInfo"); //hide info box
-   questionBox.classList.add("activeQuiz"); //show quiz box
+function hideStart(_event){
+    document.getElementById("start-screen").style.display="none";
 
 }
+
+startButton.addEventListener("click", hideStart);
 
 //quiz timer
 let timer

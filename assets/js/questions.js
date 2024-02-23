@@ -1,45 +1,39 @@
 
 let questionsAndAnswers = [
          {
-            number: 1, 
             question: ' An array can be used to collect data on:',
-            answer: "All data types",
-            options: [
-                 'Only strings',
-                 'Only Booleans',
-                 'Only Integers',
-                 'All data types',
+            answers: [
+                 {text: 'Only strings', correct: false},
+                 {text: 'Only Booleans', correct: false},
+                 {text: 'Only Integers', correct: false},
+                 {text: 'All data types', correct: true}
              ]
          },
          {
-            number: 2, 
-            question: ' What does DOM stand for:',
-            answer: "Document, Object, Model",
-            options: [
-                 'Document, Object, Model',
-                 'Directory, Object, Mode',
-                 'Document, Object, Mirror',
-                 'Do not, Offer, Milk',
+            question: 'What does DOM stand for:',
+            answers: [
+                 {text: 'Document, Object, Model', correct: true},
+                 {text: 'Directory, Object, Mode', correct: false},
+                 {text: 'Document, Object, Mirror', correct: false},
+                 {text: 'Do not, Offer, Milk', correct: false}
              ]
          },
          {
-            number: 3, 
-            question: ' var, let and const all operate in the same way and have no distinctions:',
-            answer: "False", 
-            options: [
-                 'True',
-                 'False',
+            question: 'var, let and const all operate in the same way and have no distinctions:',
+            answers: [
+                 {text: 'True', correct: false},
+                 {text: 'False', correct: true},
              ]
          },
          {
-            number: 4, 
-            question: ' Which event would work best with a submit button?',
-            answer: "click or onclick", 
-            options: [
-                 'keydown or onkeydown',
-                 'change or onchange',
-                 'click or onclick',
-                 'load or onload',
+            question: 'Which event would work best with a submit button?:',
+            answers: [
+                 {text: 'keydown or onkeydown', correct: true},
+                 {text: 'change or onchange', correct: false},
+                 {text: 'click or onclick', correct: true},
+                 {text: 'load or onload', correct: false}
              ]
          },
      ];
+
+     

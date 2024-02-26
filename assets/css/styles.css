@@ -37,7 +37,7 @@ a:hover {
   border: 0;
   transition: background-color 0.1s;
 }
-#nextButton {
+#myButton {
   display: none;
   margin: 5px;
   cursor: pointer;
@@ -54,9 +54,6 @@ button:hover {
   background-color: #8570a5;
 }
 
-.choices button {
-  display: block;
-}
 
 input[type="text"] {
   font-size: 100%;

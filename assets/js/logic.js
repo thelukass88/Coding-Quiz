@@ -106,10 +106,25 @@ function restartQuiz() {
 // Event listener for replay button
 replayBtn.addEventListener('click', restartQuiz);
 
+// Function to play correct sound effect
+function playCorrectSound() {
+  const correctSound = document.getElementById('correctSound');
+  correctSound.play();
+}
+
+// Function to play incorrect sound effect
+function playIncorrectSound() {
+  const incorrectSound = document.getElementById('incorrectSound');
+  incorrectSound.play();
+}
+
 // Handle option click
 function handleOptionClick(optionIndex) {
   if (optionIndex === quizData[currentQuestionIndex].answer) {
       userScore++;
+      playCorrectSound(); // Play correct sound effect
+    } else {
+        playIncorrectSound(); // Play incorrect sound effect
   }
   currentQuestionIndex++;
   if (currentQuestionIndex < quizData.length) {

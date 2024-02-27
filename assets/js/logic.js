@@ -3,188 +3,148 @@ startQuizButton.addEventListener("click", startQuiz);
 function startQuiz() {
   console.log("Started!");
   document.getElementById("start-screen").style.display="none";
-  document.getElementById("questions").style.display="block";
-  document.getElementById("myButton").style.display="block";
+  document.getElementById("quizContainer").style.display="block";
 }
 
-// Get a reference to the button, the question container, and the choices container
-var button = document.getElementById('myButton');
-var questionContainer = document.getElementById('question');
-var choicesButtons = document.querySelectorAll('.choiceButton');
 
-// Initialize index to 0 (start from the first question)
-var currentIndex = 0;
+// Quiz data
+const quizData = [
+  {
+    question: 'What does the D in DOM stand for?',
+    options: ['Document', 'Donut', 'Destroy', 'Dominate'],
+    answer: 0 // Index of correct option in options array
+  },
+  {
+    question: 'What can you put inside an array?',
+    options: ['Only Strings', 'Only Integers', 'Only Booleans', 'All of the above'],
+    answer: 3
+  },
+  {
+    question: 'Which of these is not a type of loop?',
+    options: ['For', 'When', 'If', 'While'],
+    answer: 1
+  },
+  {
+    question: 'An integer is a...?',
+    options: ['Number', 'Text', 'Someone into gers', 'Images'],
+    answer: 0
+  },
+  {
+    question: 'Which one of these does NOT need to be in a README file?',
+    options: ['Screenshots of application', 'Licence to code', 'Licence to Kill', 'Testing'],
+    answer: 2
+  },
+  {
+    question: 'What is the name of the titles inside of an object?',
+    options: ['Tags', 'Keys', 'Headings', 'Signs'],
+    answer: 1
+  },
+  {
+    question: 'Which command allows you to move into a file on the terminal?',
+    options: ['cd ..', 'ls', 'git add .', 'cd fileName'],
+    answer: 3
+  },
+  {
+    question: 'What is the name of test the looks at a smaller function within code?',
+    options: ['Mock', 'Practice', 'Test', 'Suck it and see'],
+    answer: 0
+  }
+  // Add more questions as needed
+];
 
-// Function to update question and choices
-function updateQuestion() {
-    // Access the current question
-    var currentQuestion = questions[currentIndex];
-    
-    // Update the question text
-    questionContainer.textContent = currentQuestion.question;
-    
-    // Update the choices buttons text
-    currentQuestion.choices.forEach(function(choice, index) {
-        choicesButtons[index].textContent = choice;
-    });
+// Quiz state
+let currentQuestionIndex = 0;
+let userScore = 0;
+
+// DOM elements
+const quizContainer = document.getElementById('quizContainer');
+const resultContainer = document.getElementById('resultContainer');
+const scoreboardContainer = document.getElementById('scoreboardContainer');
+const timerContainer = document.getElementById('timerContainer');
+const questionElement = document.getElementById('question');
+const optionsElement = document.getElementById('options');
+const submitBtn = document.getElementById('submitBtn');
+const userScoreElement = document.getElementById('userScore');
+const userNameElement = document.getElementById('userName');
+const saveScoreBtn = document.getElementById('saveScoreBtn');
+const scoreListElement = document.getElementById('scoreList');
+const timerElement = document.getElementById('timer');
+
+// Initialize quiz
+function initQuiz() {
+  renderQuestion();
+  renderTimer();
 }
 
-// Call the updateQuestion function to initially set the question and choices
-updateQuestion();
+// Render question
+function renderQuestion() {
+  const currentQuestion = quizData[currentQuestionIndex];
+  questionElement.textContent = currentQuestion.question;
+  optionsElement.innerHTML = '';
+  currentQuestion.options.forEach((option, index) => {
+      const optionBtn = document.createElement('button');
+      optionBtn.textContent = option;
+      optionBtn.addEventListener('click', () => handleOptionClick(index));
+      optionsElement.appendChild(optionBtn);
+  });
+}
 
-// Add event listener to the buttons
-choicesButtons.forEach(function(button) {
-    button.addEventListener('click', function() {
-        // Increment the index
-        currentIndex++;
-        
-        // If the index exceeds the length of the array, reset it to 0 (start from the beginning)
-        if (currentIndex >= questions.length) {
-            currentIndex = 0;
-        }
-        
-        // Update the question and choices
-        updateQuestion();
-    });
+// Handle option click
+function handleOptionClick(optionIndex) {
+  if (optionIndex === quizData[currentQuestionIndex].answer) {
+      userScore++;
+  }
+  currentQuestionIndex++;
+  if (currentQuestionIndex < quizData.length) {
+      renderQuestion();
+  } else {
+      showResult();
+  }
+}
+
+// Render result
+function showResult() {
+  quizContainer.style.display = 'none';
+  resultContainer.style.display = 'block';
+  userScoreElement.textContent = userScore;
+}
+
+// Save score
+saveScoreBtn.addEventListener('click', () => {
+  const userName = userNameElement.value;
+  const scoreData = { name: userName, score: userScore };
+  localStorage.setItem('userScore', JSON.stringify(scoreData));
+  renderScoreboard();
 });
 
-// Add event listener to the button
-button.addEventListener('click', function() {
-    // Increment the index
-    currentIndex++;
-    
-    // If the index exceeds the length of the array, reset it to 0 (start from the beginning)
-    if (currentIndex >= questions.length) {
-        currentIndex = 0;
-    }
-    
-    // Update the question and choices
-    updateQuestion();
-});
+// Render scoreboard
+function renderScoreboard() {
+  scoreboardContainer.style.display = 'block';
+  scoreListElement.innerHTML = '';
+  const storedScoreData = localStorage.getItem('userScore');
+  if (storedScoreData) {
+      const scoreData = JSON.parse(storedScoreData);
+      const scoreItem = document.createElement('li');
+      scoreItem.textContent = `${scoreData.name}: ${scoreData.score}`;
+      scoreListElement.appendChild(scoreItem);
+  }
+}
 
+// Timer functionality
+function renderTimer() {
+  let timeLeft = 60;
+  const timerInterval = setInterval(() => {
+      timeLeft--;
+      const minutes = Math.floor(timeLeft / 60);
+      const seconds = timeLeft % 60;
+      timerElement.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+      if (timeLeft === 0) {
+          clearInterval(timerInterval);
+          timerContainer.style.display = 'none';
+          initQuiz();
+      }
+  }, 1000);
+}
 
-
-// button.addEventListener("click", startQuestions);
-
-// function startQuestions() {
-//       // Iterate through the array of objects
-//       for (var i = 0; i < questions.length; i++) {
-//         // Access each object
-//         var currentObject = questions[i];
-        
-//         // Do something with the object, for example, log its properties
-//         console.log("Name:", currentObject.name, ", Value:", currentObject.value);
-//     }
-
-// }
-//     // Iterate through the array of objects
-//     for (var i = 0; i < questions.length; i++) {
-//         // Access each object
-//         var currentObject = questions[i];
-        
-//         // Do something with the object, for example, log its properties
-//         console.log("Name:", currentObject.name, ", Value:", currentObject.value);
-//     }
-
-
-// const question = document.getElementById("question");
-// const choiceOne = document.getElementById("choice-text1");
-// const choiceTwo = document.getElementById("choice-text2");
-// const choiceThree = document.getElementById("choice-text3");
-// const choiceFour = document.getElementById("choice-text4");
-
-// const questionOne = questions[0].question;
-// const questionOneChoiceOne = questions[0].choice1;
-// const questionOneChoiceTwo = questions[0].choice2;
-// const questionOneChoiceThree = questions[0].choice3;
-// const questionOneChoiceFour = questions[0].choice4;
-
-
-// function startQuiz() {
-//   console.log("Started!");
-//   document.getElementById("start-screen").style.display="none";
-//   document.getElementById("questions").style.display="block";
-//   question.innerHTML = questionOne;
-//   choiceOne.innerHTML = questionOneChoiceOne;
-//   choiceTwo.innerHTML = questionOneChoiceTwo;
-//   choiceThree.innerHTML = questionOneChoiceThree;
-//   choiceFour.innerHTML = questionOneChoiceFour;
-//   toQuestionTwo();
-// };
-
-// function toQuestionTwo() {
-//   choiceOne.addEventListener("click", startQuestionTwo);
-//   choiceTwo.addEventListener("click", startQuestionTwo);
-//   choiceThree.addEventListener("click", startQuestionTwo);
-//   choiceFour.addEventListener("click", startQuestionTwo);
-// };
-
-// function startQuestionTwo() {
-//   const questionTwo = questions[1].question;
-//   const questionTwoChoiceOne = questions[1].choice1;
-//   const questionTwoChoiceTwo = questions[1].choice2;
-//   const questionTwoChoiceThree = questions[1].choice3;
-//   const questionTwoChoiceFour = questions[1].choice4;
-
-//   question.innerHTML = questionTwo;
-//   choiceOne.innerHTML = questionTwoChoiceOne;
-//   choiceTwo.innerHTML = questionTwoChoiceTwo;
-//   choiceThree.innerHTML = questionTwoChoiceThree;
-//   choiceFour.innerHTML = questionTwoChoiceFour;
-
-//   toQuestionThree();
-// }
-
-// function toQuestionThree() {
-//   choiceOne.addEventListener("click", startQuestionThree);
-//   choiceTwo.addEventListener("click", startQuestionThree);
-//   choiceThree.addEventListener("click", startQuestionThree);
-//   choiceFour.addEventListener("click", startQuestionThree);
-// };
-
-// function startQuestionThree() {
-//   const questionThree = questions[2].question;
-//   const questionThreeChoiceOne = questions[2].choice1;
-//   const questionThreeChoiceTwo = questions[2].choice2;
-
-//   question.innerHTML = questionThree;
-//   choiceOne.innerHTML = questionThreeChoiceOne;
-//   choiceTwo.innerHTML = questionThreeChoiceTwo;
-//   document.getElementById("choice-text3").style.display="none";
-//   document.getElementById("choice-text4").style.display="none";
-
-
-//   toQuestionFour();
-// }
-
-// function toQuestionFour() {
-//   choiceOne.addEventListener("click", startQuestionFour);
-//   choiceTwo.addEventListener("click", startQuestionFour);
-//   choiceThree.addEventListener("click", startQuestionFour);
-//   choiceFour.addEventListener("click", startQuestionFour);
-// };
-
-// function startQuestionFour() {
-//   const questionFour = questions[3].question;
-//   const questionFourChoiceOne = questions[3].choice1;
-//   const questionFourChoiceTwo = questions[3].choice2;
-//   const questionFourChoiceThree = questions[3].choice3;
-//   const questionFourChoiceFour = questions[3].choice4;
-
-//   question.innerHTML = questionFour;
-//   choiceOne.innerHTML = questionFourChoiceOne;
-//   choiceTwo.innerHTML = questionFourChoiceTwo;
-//   choiceThree.innerHTML = questionFourChoiceThree;
-//   choiceFour.innerHTML = questionFourChoiceFour;
-//   document.getElementById("choice-text3").style.display="block";
-//   document.getElementById("choice-text4").style.display="block";
-
-//   toHighScores();
-// }
-
-// function toHighScores() {
-//   choiceOne.addEventListener("click", );
-//   choiceTwo.addEventListener("click", startQuestionFour);
-//   choiceThree.addEventListener("click", startQuestionFour);
-//   choiceFour.addEventListener("click", startQuestionFour);
-// };
+// Start quiz
+initQuiz();

@@ -13,7 +13,11 @@ a:hover {
   color: #8570a5;
 }
 
-.choiceButton {
+#quizContainer {
+  display: none;
+}
+
+#options button{
   display: inline-block;
   margin: 5px;
   cursor: pointer;
@@ -102,8 +106,12 @@ li:nth-child(odd) {
   border-top: 2px solid #ccc;
 }
 
-.timer {
-  position: absolute;
-  top: 10px;
+#timer {
+  position: block;
+  top: 0;
   right: 10px;
+}
+
+h4{
+  margin-bottom: 0;
 }

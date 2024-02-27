@@ -1,57 +1,54 @@
-<!DOCTYPE html>
-<html lang="en-gb">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Coding Quiz</title>
-
-    <link rel="stylesheet" href="./assets/css/styles.css" />
-  </head>
-
-  <body>
-    <div class="scores"><a href="highscores.html">View Highscores</a></div>
-
-    <div class="timer">Time: <span id="time">0</span></div>
-
-    <div class="wrapper">
-      <div id="start-screen" class="start">
-        <h1>Coding Quiz Challenge</h1>
-        <p>
-          Try to answer the following code-related questions within the time
-          limit. Keep in mind that incorrect answers will penalize your
-          score/time by ten seconds!
-        </p>
-        <button id="startButton">Start Quiz</button>
-      </div>
-
-      <div id="questions" class="hide">
-        <div id="game" class="justify-center flex-column">
-          <div id="question"></div>
-          <div id="choices">
-            <button class="choiceButton" id="choice1"></button>
-            <button class="choiceButton" id="choice2"></button>
-            <button class="choiceButton" id="choice3"></button>
-            <button class="choiceButton" id="choice4"></button>
+ <!DOCTYPE html>
+      <html lang="en">
+      <head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <title>Quiz Application</title>
+          <link rel="stylesheet" href="./assets/css/styles.css" />
+      </head>
+      <body>
+        <!-- <div class="scores"><a href="highscores.html">View Highscores</a></div> -->
+        <!-- Timer Container -->
+        <div class="timerContainer"><h4>Time:</h4><span id="timer">1:00</span></div>
+        <!-- Timer Container
+        <div id="timerContainer">
+            <h1>Timer</h1>
+            <p id="timer">1:00</p>
+        </div> -->
+    
+        <div class="wrapper">
+          <div id="start-screen" class="start">
+            <h1>Coding Quiz Challenge</h1>
+            <p>
+              Try to answer the following code-related questions within the time
+              limit. Keep in mind that incorrect answers will penalize your
+              score/time by ten seconds!
+            </p>
+            <button id="startButton">Start Quiz</button>
           </div>
-          <button id="myButton">Next Question</button>
-        </div>
-      </div>
 
-
-      <div id="end-screen" class="hide">
-        <h2>All done!</h2>
-        <p>Your final score is <span id="final-score"></span>.</p>
-        <p>
-          Enter initials: <input type="text" id="initials" max="3" />
-          <button id="submit">Submit</button>
-        </p>
-      </div>
-
-      <div id="feedback" class="feedback hide"></div>
-    </div>
-
-        <script src="./assets/js/questions.js"></script>
-    <script src="./assets/js/logic.js"></script>
-  </body>
-</html>
+          <!-- Quiz Container -->
+          <div id="quizContainer">
+              <!-- Quiz Questions and Options -->
+              <h1 id="question"></h1>
+              <div id="options"></div>
+          </div>
+      
+          <!-- Result Container -->
+          <div id="resultContainer" style="display: none;">
+              <h1>Quiz Result</h1>
+              <p>Your score: <span id="userScore"></span></p>
+              <input type="text" id="userName" placeholder="Enter your name">
+              <button id="saveScoreBtn">Save Score</button>
+          </div>
+      
+          <!-- Scoreboard Container -->
+          <div id="scoreboardContainer" style="display: none;">
+              <h1>Scoreboard</h1>
+              <ul id="scoreList"></ul>
+          </div>
+      
+          <!-- JavaScript -->
+          <script src="./assets/js/logic.js"></script>
+      </body>
+      </html>

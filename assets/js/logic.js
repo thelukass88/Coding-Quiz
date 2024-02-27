@@ -46,7 +46,7 @@ const quizData = [
     answer: 3
   },
   {
-    question: 'What is the name of test the looks at a smaller function within code?',
+    question: 'What is the name of test that looks at a smaller function within code?',
     options: ['Mock', 'Practice', 'Test', 'Suck it and see'],
     answer: 0
   }

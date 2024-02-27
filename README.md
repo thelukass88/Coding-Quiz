@@ -1,53 +1,35 @@
-# Coding-Quiz
-A Coding Quiz Page - Web APIs 
-# <Week 6 Homework - Coding Quiz>
-
+# Coding Quiz Game
+![Github licence](https://img.shields.io/badge/your_licence:-MIT-blue.svg)
 ## Links
-Repository:
+Repo Link:
 https://github.com/thelukass88/Coding-Quiz
-Live page:
+Deployed Page Link:
 https://thelukass88.github.io/Coding-Quiz/
-PNG
-./assets/codingquiz.png
-
 
 ## Description
-Create a code quiz that contains the following requirements:
-
-A start button that when clicked a timer starts and the first question appears.
-Questions contain buttons for each answer.
-When answer is clicked, the next question appears
-If the answer clicked was incorrect then subtract time from the clock
-
-The quiz should end when all questions are answered or the timer reaches 0.
-
-When the game ends, it should display their score and give the user the ability to save their initials and their score
-
-
-## Expected Output
-As above.
-
-
-## Usage
-
+Using JS, the quiz game loops through 8 questions using multiple choices andwers, that have been put into an array of objects. The game uses local storage to save the scores of the users and input them into a highscores table. The game is playable again after clicking the 'Play Again' button, however, I could not get the timer to restart after a number of tries. The new score does add to the scoreboard. 
+## Table of Contents
+* [Installation](#installation)
+* [Useage](#useage)
+* [Licence](#licence)
+* [Contributions](#contributors)
+* [Testing](#tests)
+* [Questions](#questions)
+## Images
+![Question Example 1](./assets/assets/question-examples-1.png)
+![Question Example 2](./assets/assets/question-examples-2.png)
+![Scoreboard](./assets/assets/scoreboard.png)
+## Installation
 N/A
-
-## Comments
-
-Successes:
-- click from Start Button takes user to first questions
-- question number, text and options are loaded from questions.js file
-- timer begins on first click
-
-To be worked on:
-- cleaner code (currently too lengthy)
-- button to second question not functioning 
-- timer continues into minus numbers
-- no high scores recorded 
-
-
-## License
-
-MIT Licence - See repo
-
----
+## Useage
+Click 'Start Game' - Answers questions by clicking multiple choice buttons - enter name at the end to store score in highscores table.
+## Licence
+Your application is licenced under: MIT
+## Contributions
+N/A
+## Tests
+N/A
+## Questions
+If you would like to contact me<br>
+visit: [github/thelukass88](https://github.com/thelukass88)<br>
+email: l.holliday88@hotmail.com

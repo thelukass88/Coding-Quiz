@@ -50,7 +50,7 @@ const quizData = [
     options: ['Mock', 'Practice', 'Test', 'Suck it and see'],
     answer: 0
   }
-  // Add more questions as needed
+
 ];
 
 // Quiz state
@@ -70,6 +70,7 @@ const userNameElement = document.getElementById('userName');
 const saveScoreBtn = document.getElementById('saveScoreBtn');
 const scoreListElement = document.getElementById('scoreList');
 const timerElement = document.getElementById('timer');
+const playAgain = document.getElementById('playAgain');
 
 // Initialize quiz
 function initQuiz() {
@@ -77,7 +78,7 @@ function initQuiz() {
   renderTimer();
 }
 
-// Render question
+// Render questions
 function renderQuestion() {
   const currentQuestion = quizData[currentQuestionIndex];
   questionElement.textContent = currentQuestion.question;
@@ -103,11 +104,22 @@ function handleOptionClick(optionIndex) {
   }
 }
 
+
+playAgain.addEventListener("click", replay);
+
+function replay() {
+  document.getElementById("start-screen").style.display="block";
+  document.getElementById("scoreboardContainer").style.display="none";
+  document.getElementById("resultContainer").style.display="none";
+
+}
+
 // Render result
 function showResult() {
   quizContainer.style.display = 'none';
   resultContainer.style.display = 'block';
   userScoreElement.textContent = userScore;
+  timerElement.style.display = 'none';
 }
 
 // Initialize high scores from local storage
@@ -149,8 +161,8 @@ function renderTimer() {
       timerElement.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
       if (timeLeft === 0) {
           clearInterval(timerInterval);
-          timerContainer.style.display = 'none';
-          initQuiz();
+          // timerContainer.style.display = 'none';
+          showResult(); // End the quiz and display the result
       }
   }, 1000);
 }

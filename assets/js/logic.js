@@ -70,7 +70,7 @@ const userNameElement = document.getElementById('userName');
 const saveScoreBtn = document.getElementById('saveScoreBtn');
 const scoreListElement = document.getElementById('scoreList');
 const timerElement = document.getElementById('timer');
-const playAgain = document.getElementById('playAgain');
+const replayBtn = document.getElementById('playAgain');
 
 // Initialize quiz
 function initQuiz() {
@@ -91,6 +91,21 @@ function renderQuestion() {
   });
 }
 
+// Function to reset quiz state and start the quiz again
+function restartQuiz() {
+  currentQuestionIndex = 0;
+  userScore = 0;
+  quizContainer.style.display = 'block';
+  resultContainer.style.display = 'none';
+  timerContainer.style.display = 'block';
+  timerElement.style.display = 'block';
+  clearInterval(timerInterval); // Clear the previous timer interval
+  renderTimer(); // Restart the timer
+  initQuiz(); // Start the quiz again
+}
+// Event listener for replay button
+replayBtn.addEventListener('click', restartQuiz);
+
 // Handle option click
 function handleOptionClick(optionIndex) {
   if (optionIndex === quizData[currentQuestionIndex].answer) {
@@ -104,15 +119,6 @@ function handleOptionClick(optionIndex) {
   }
 }
 
-
-playAgain.addEventListener("click", replay);
-
-function replay() {
-  document.getElementById("start-screen").style.display="block";
-  document.getElementById("scoreboardContainer").style.display="none";
-  document.getElementById("resultContainer").style.display="none";
-
-}
 
 // Render result
 function showResult() {

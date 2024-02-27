@@ -4,6 +4,7 @@ function startQuiz() {
   console.log("Started!");
   document.getElementById("start-screen").style.display="none";
   document.getElementById("quizContainer").style.display="block";
+  document.getElementById("timerAppear").style.display="block";
 }
 
 
@@ -109,26 +110,34 @@ function showResult() {
   userScoreElement.textContent = userScore;
 }
 
+// Initialize high scores from local storage
+let highScores = JSON.parse(localStorage.getItem('highScores')) || [];
+
+// Save high scores to local storage
+function saveHighScores() {
+    localStorage.setItem('highScores', JSON.stringify(highScores));
+}
+
 // Save score
 saveScoreBtn.addEventListener('click', () => {
-  const userName = userNameElement.value;
-  const scoreData = { name: userName, score: userScore };
-  localStorage.setItem('userScore', JSON.stringify(scoreData));
-  renderScoreboard();
+    const userName = userNameElement.value;
+    const scoreData = { name: userName, score: userScore };
+    highScores.push(scoreData); // Add the new score to highScores array
+    saveHighScores(); // Save the updated highScores array to local storage
+    renderScoreboard();
 });
 
 // Render scoreboard
 function renderScoreboard() {
-  scoreboardContainer.style.display = 'block';
-  scoreListElement.innerHTML = '';
-  const storedScoreData = localStorage.getItem('userScore');
-  if (storedScoreData) {
-      const scoreData = JSON.parse(storedScoreData);
-      const scoreItem = document.createElement('li');
-      scoreItem.textContent = `${scoreData.name}: ${scoreData.score}`;
-      scoreListElement.appendChild(scoreItem);
-  }
+    scoreboardContainer.style.display = 'block';
+    scoreListElement.innerHTML = '';
+    highScores.forEach(scoreData => {
+        const scoreItem = document.createElement('li');
+        scoreItem.textContent = `${scoreData.name}: ${scoreData.score}`;
+        scoreListElement.appendChild(scoreItem);
+    });
 }
+
 
 // Timer functionality
 function renderTimer() {

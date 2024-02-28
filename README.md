@@ -23,6 +23,7 @@ Using JS, the quiz game loops through 8 questions using multiple choices andwers
 N/A
 ## Useage
 Click 'Start Game' - Answers questions by clicking multiple choice buttons - enter name at the end to store score in highscores table.
+Could not get questions.js file ton connect to the logic.js file. 
 ## Licence
 Your application is licenced under: MIT
 ## Contributions

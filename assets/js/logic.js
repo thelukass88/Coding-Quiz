@@ -164,6 +164,8 @@ saveScoreBtn.addEventListener('click', () => {
 function renderScoreboard() {
     scoreboardContainer.style.display = 'block';
     scoreListElement.innerHTML = '';
+
+    highScores.sort((a, b) => b.score - a.score);
     highScores.forEach(scoreData => {
         const scoreItem = document.createElement('li');
         scoreItem.textContent = `${scoreData.name}: ${scoreData.score}`;
